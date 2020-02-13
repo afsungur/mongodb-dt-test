@@ -1,0 +1,31 @@
+{
+    "_id": {
+        "$inc": {
+            "start": 10000000
+        }
+    },
+    "type": {
+        "$choose": {
+            "from": [
+                "IMSI",
+                "MSISDN",
+                "DEVICE_ID",
+                "ICC_ID"
+            ]
+        }
+    },
+    "value": {
+        "$inc": {
+            "start": 100000000
+        }
+    },
+    "status": {
+        "$choose": {
+            "from": [
+                "FREE",
+                "ACTIVE",
+                "RESERVED"
+            ]
+        }
+    }
+}

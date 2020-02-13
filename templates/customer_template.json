@@ -1,0 +1,266 @@
+{
+    "customerId": {
+        "$inc": {
+            "start": 0
+        }
+    },
+    "createdDate": {
+        "$date": {
+            "min": "2017-01-01",
+            "max": "2018-01-01"
+        }
+    },
+    "modifiedDate": {
+        "$date": {
+            "min": "2018-01-01",
+            "max": "2019-01-01"
+        }},
+    "contacts": {
+        "$array": {
+            "of": {
+                "contactValue": "$phone",
+                "contactType": {
+                    "$choose": {
+                        "from": [
+                            "work",
+                            "home",
+                            "office"
+                        ]
+                    }
+                },
+                "priority": {
+                    "$choose": {
+                        "from": [
+                            "HIGH",
+                            "MEDIUM",
+                            "LOW"
+                        ]
+                    }
+                }
+            },
+            "number": {
+                "$integer": {
+                    "min": 2,
+                    "max": 5
+                }
+            }
+        }
+    },
+    "addresses": {
+        "$array": {
+            "of": {
+                "expiryDate": {
+                    "$date": {
+                        "min": "2017-01-01",
+                        "max": "2019-12-31"
+                    }
+                },
+                "addressLine1": "$address",
+                "addressLine2": "$address",
+                "poBox": {
+                    "$string": {
+                        "numeric": true,
+                        "length": 6,
+                        "alpha": false
+                    }
+                },
+                "contactmobileno": "$phone",
+                "type": {
+                    "$choose": {
+                        "from": [
+                            "work",
+                            "home",
+                            "office"
+                        ]
+                    }
+                },
+                "emirate_and_city": {
+                    "$choose": {
+                        "from": [
+                            {
+                                "emirate": "Dubai",
+                                "city": "Jebel Ali"
+                            },
+                            {
+                                "emirate": "Dubai",
+                                "city": "Hatta"
+                            },
+                            {
+                                "emirate": "Dubai",
+                                "city": "Internet City"
+                            },
+                            {
+                                "emirate": "Dubai",
+                                "city": "Sports City"
+                            },
+                            {
+                                "emirate": "Dubai",
+                                "city": "Festival City"
+                            },
+                            {
+                                "emirate": "Abu Dhabi",
+                                "city": "Bani Yas City"
+                            },
+                            {
+                                "emirate": "Abu Dhabi",
+                                "city": "Building Materials City"
+                            },
+                            {
+                                "emirate": "Abu Dhabi",
+                                "city": "New Port City"
+                            },
+                            {
+                                "emirate": "Abu Dhabi",
+                                "city": "Mussaffah"
+                            },
+                            {
+                                "emirate": "Abu Dhabi",
+                                "city": "Ruwais"
+                            },
+                            {
+                                "emirate": "Sharjah",
+                                "city": "Sharjah Media City"
+                            },
+                            {
+                                "emirate": "Sharjah",
+                                "city": "Sharjah Publishing City"
+                            },
+                            {
+                                "emirate": "Sharjah",
+                                "city": "Sharjah University City"
+                            },
+                            {
+                                "emirate": "Ras Al Khaimah",
+                                "city": "Ras Al Khaimah"
+                            },
+                            {
+                                "emirate": "Fujairah",
+                                "city": "Fujairah"
+                            },
+                            {
+                                "emirate": "Ajman",
+                                "city": "Ajman"
+                            },
+                            {
+                                "emirate": "Umm Al Quwain",
+                                "city": "Umm Al Quwain"
+                            }
+                        ]
+                    }
+                }
+            },
+            "number": {
+                "$integer": {
+                    "min": 2,
+                    "max": 5
+                }
+            }
+        }
+    },
+    "documents": {
+        "$array": {
+            "of": {
+                "effectiveFrom": {
+                    "$date": {
+                        "min": "2017-01-01",
+                        "max": "2017-12-31"
+                    }
+                },
+                "effectiveTill": {
+                    "$date": {
+                        "min": "2018-01-01",
+                        "max": "2019-12-31"
+                    }
+                },
+                "identityType": {
+                    "$choose": {
+                        "from": [
+                            "EMIRATES_ID",
+                            "PASSPORT",
+                            "VEHICLE_REGISTRATION"
+                        ]
+                    }
+                },
+                "identityValue": {
+                    "$string": {
+                        "numeric": true,
+                        "length": 12,
+                        "alpha": true
+                    }
+                },
+                "documentName": {
+                    "$string": {
+                        "numeric": false,
+                        "length": 12,
+                        "alpha": true
+                    }
+                }
+            },
+            "number": {
+                "$integer": {
+                    "min": 2,
+                    "max": 5
+                }
+            }
+        }
+    },
+    "status": {
+        "$choose": {
+            "from": [
+                "ACTIVE",
+                "PASSIVE"
+            ]
+        }
+    },
+    "fullName": "$name",
+    "gender": {
+        "$choose": {
+            "from": [
+                "M",
+                "F",
+                "Others"
+            ]
+        }
+    },
+    "dateOfBirth": {
+        "$date": {
+            "min": "1930-01-01",
+            "max": "2010-12-31"
+        }
+    },
+    "segments": {
+        "$choose": {
+            "from": [
+                "PREMIUM",
+                "FIRSTCLASS",
+                "REGULAR",
+                "AMATEUR"
+            ]
+        }
+    },
+    "religion": {
+        "$choose": {
+            "from": [
+                "Muslim",
+                "Christian",
+                "Jewish",
+                "Others"
+            ]
+        }
+    },
+    "nationality": {
+        "$country": {
+            "full": true
+        }
+    },
+    "maritalStatus": {
+        "$choose": {
+            "from": [
+                "Married",
+                "Divorced",
+                "Widowed",
+                "Single"
+            ]
+        }
+    }
+}

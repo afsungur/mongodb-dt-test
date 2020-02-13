@@ -1,0 +1,23 @@
+sharding:
+  clusterRole: shardsvr
+replication:
+  replSetName: shard-02-replica-set
+net:
+  bindIp: localhost
+  port: 24003
+systemLog:
+   destination: file
+   path: "/home/ec2-user/localdbcluster/log/shard-02/03/mongod.log"
+   logAppend: true
+storage:
+   wiredTiger:
+      engineConfig:
+         cacheSizeGB: 4
+   dbPath: "/home/ec2-user/localdbcluster/data/shard-02/03"
+   journal:
+      enabled: true
+processManagement:
+   fork: true
+setParameter:
+   transactionLifetimeLimitSeconds: 10
+   maxTransactionLockRequestTimeoutMillis: 100

@@ -1,0 +1,285 @@
+{
+    "orderId": {
+        "$inc": {
+            "start": 0
+        }
+    },
+    "accountId": {
+        "$integer": {
+            "min": 0,
+            "max": 10000
+        }
+    },
+    "customerId": {
+        "$integer": {
+            "min": 0,
+            "max": 1000
+        }
+    },
+    "channel": {
+        "$choose": {
+            "from": [
+                "WEB",
+                "MOBILE"
+            ]
+        }
+    },
+    "username": "$string",
+    "shipmentInfo": {
+        "scheduledDeliveryDate": "$date",
+        "actualDeliveryDate": "$date",
+        "firstContactDate": "$date",
+        "secondContactDate": "$date"
+    },
+    "paymentInfo": {
+        "paymentType": {
+            "$choose": {
+                "from": [
+                    "Credit Card",
+                    "Debit Card",
+                    "Cheque",
+                    "Cash on Delivery"
+                ]
+            }
+        },
+        "currencyCode": "$currency",
+        "discountInfo": {
+            "discountType": {
+                "$choose": {
+                    "from": [
+                        "Fixed",
+                        "Percentage",
+                        "Waive"
+                    ]
+                }
+            },
+            "discountValue": {
+                "$numberDecimal": {
+                    "min": 0,
+                    "max": 10,
+                    "fixed": 2
+                }
+            },
+            "discountApprover": "$name",
+            "discountReason": "$string"
+        }
+    },
+    "fulfilled": {
+        "$choose": {
+            "from": [
+                true,
+                false
+            ]
+        }
+    },
+    "orderStatus": {
+        "$choose": {
+            "from": [
+                "CREATED",
+                "REQUEST_TAKEN",
+                "PROGRESSING",
+                "STOCK_WAITING",
+                "DISPATCHED",
+                "DELIVERED"
+            ]
+        }
+    },
+    "address": {
+        "addressLine1": "$address",
+        "addressLine2": "$address",
+        "poBox": {
+            "$string": {
+                "numeric": true,
+                "length": 6,
+                "alpha": false
+            }
+        },
+        "contactmobileno": "$phone",
+        "type": {
+            "$choose": {
+                "from": [
+                    "work",
+                    "home",
+                    "office"
+                ]
+            }
+        },
+        "emirate_and_city": {
+            "$choose": {
+                "from": [
+                    {
+                        "emirate": "Dubai",
+                        "city": "Jebel Ali"
+                    },
+                    {
+                        "emirate": "Dubai",
+                        "city": "Hatta"
+                    },
+                    {
+                        "emirate": "Dubai",
+                        "city": "Internet City"
+                    },
+                    {
+                        "emirate": "Dubai",
+                        "city": "Sports City"
+                    },
+                    {
+                        "emirate": "Dubai",
+                        "city": "Festival City"
+                    },
+                    {
+                        "emirate": "Abu Dhabi",
+                        "city": "Bani Yas City"
+                    },
+                    {
+                        "emirate": "Abu Dhabi",
+                        "city": "Building Materials City"
+                    },
+                    {
+                        "emirate": "Abu Dhabi",
+                        "city": "New Port City"
+                    },
+                    {
+                        "emirate": "Abu Dhabi",
+                        "city": "Mussaffah"
+                    },
+                    {
+                        "emirate": "Abu Dhabi",
+                        "city": "Ruwais"
+                    },
+                    {
+                        "emirate": "Sharjah",
+                        "city": "Sharjah Media City"
+                    },
+                    {
+                        "emirate": "Sharjah",
+                        "city": "Sharjah Publishing City"
+                    },
+                    {
+                        "emirate": "Sharjah",
+                        "city": "Sharjah University City"
+                    },
+                    {
+                        "emirate": "Ras Al Khaimah",
+                        "city": "Ras Al Khaimah"
+                    },
+                    {
+                        "emirate": "Fujairah",
+                        "city": "Fujairah"
+                    },
+                    {
+                        "emirate": "Ajman",
+                        "city": "Ajman"
+                    },
+                    {
+                        "emirate": "Umm Al Quwain",
+                        "city": "Umm Al Quwain"
+                    }
+                ]
+            }
+        }
+    },
+    "orderItems": {
+        "$array": {
+            "of": {
+                "type": {
+                    "$choose": {
+                        "from": [
+                            "ADD PRODUCT",
+                            "DELETE PRODUCT",
+                            "UPDATE ACCOUNT INFO",
+                            "SR TYPES"
+                        ]
+                    }
+                },
+                "invoice": {
+                    "invoiceLanguage": "$country",
+                    "invoiceType": {
+                        "$choose": {
+                            "from": [
+                                "PAPER",
+                                "EMAIL",
+                                "SMS",
+                                "AMATEUR"
+                            ]
+                        }
+                    },
+                    "detailedInvoice": {
+                        "$choose": {
+                            "from": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    "hideName": {
+                        "$choose": {
+                            "from": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    "emailId": "$email"
+                },
+                "chargeInfo": {
+                    "$array": {
+                        "of": {
+                            "amount": {
+                                "$numberDecimal": {
+                                    "min": 10,
+                                    "max": 50,
+                                    "fixed": 1
+                                }
+                            },
+                            "chargedDate": "$date"
+                        },
+                        "number": {
+                            "$integer": {
+                                "min": 0,
+                                "max": 3
+                            }
+                        }
+                    }
+                },
+                "product": {
+                    "quantity": {
+                        "$integer": {
+                            "min": 1,
+                            "max": 3
+                        }
+                    },
+                    "productCode1": "$string",
+                    "productCode2": "$string",
+                    "productDescription" : { "$paragraph" : { "sentences" : 2 } },
+                    "productAttributes": {
+                        "$array": {
+                            "of": {
+                                "name": "$string",
+                                "value": "$string"
+                            },
+                            "number": {
+                                "$integer": {
+                                    "min": 2,
+                                    "max": 10
+                                }
+                            }
+                        }
+                    },
+                    "productSpecId": {
+                        "$integer": {
+                            "min": 0,
+                            "max": 1000000
+                        }
+                    }
+                }
+            },
+            "number": {
+                "$integer": {
+                    "min": 3,
+                    "max": 20
+                }
+            }
+        }
+    }
+}

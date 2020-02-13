@@ -1,0 +1,96 @@
+{
+    "accountId": {
+        "$inc": {
+            "start": 52000000
+        }
+    },
+    "customerId": {
+        "$integer": {
+            "min": 0,
+            "max": 1000
+        }
+    },
+    "accountNumber": {
+        "$inc": {
+            "start": 52000000
+        }
+    },
+    "accountStatus": {
+        "$choose": {
+            "from": [
+                "ACTIVE",
+                "PASSIVE",
+                "BLOCKED",
+                "UNDER_INVESTIGATION"
+            ]
+        }
+    },
+    "creditStatus": {
+        "$choose": {
+            "from": [
+                "CLEAR",
+                "BLACKLIST",
+                "UNDER_INVESTIGATION",
+                "TOO_RISKY",
+                "LESS_RISKY"
+            ]
+        }
+    },
+    "createdDate": {
+        "$date": {
+            "min": "2017-01-01",
+            "max": "2017-12-31"
+        }
+    },
+    "modifiedDate": {
+        "$date": {
+            "min": "2018-01-01",
+            "max": "2019-12-31"
+        }
+    },
+    "imsi": {
+        "$numberLong": {
+            "min": 100000000000
+        }
+    },
+    "category": {
+        "$choose": {
+            "from": [
+                "PREMIUM",
+                "FIRST_CLASS",
+                "REGULAR",
+                "AMATEUR"
+            ]
+        }
+    },
+    "invoice": {
+        "invoiceLanguage": "$country",
+        "invoiceType": {
+            "$choose": {
+                "from": [
+                    "PAPER",
+                    "EMAIL",
+                    "SMS",
+                    "AMATEUR"
+                ]
+            }
+        },
+        "detailedInvoice": {
+            "$choose": {
+                "from": [
+                    true,
+                    false
+                ]
+            }
+        },
+        "hideName": {
+            "$choose": {
+                "from": [
+                    true,
+                    false
+                ]
+            }
+        },
+        "emailId": "$email"
+    }
+}

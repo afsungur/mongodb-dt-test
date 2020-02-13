@@ -1,0 +1,20 @@
+sharding:
+  clusterRole: configsvr
+replication:
+  replSetName: config-server-replica-set
+net:
+  bindIp: localhost
+  port: 21003
+systemLog:
+   destination: file
+   path: "/home/ec2-user/localdbcluster/log/configserver/03/mongod.log"
+   logAppend: true
+storage:
+   wiredTiger:
+      engineConfig:
+         cacheSizeGB: 2
+   dbPath: "/home/ec2-user/localdbcluster/data/configserver/03"
+   journal:
+      enabled: true
+processManagement:
+   fork: true

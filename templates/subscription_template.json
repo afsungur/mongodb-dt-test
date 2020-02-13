@@ -1,0 +1,86 @@
+{
+    "subscriptionId": {
+        "$inc": {
+            "start": 0
+        }
+    },
+    "customerId": {
+        "$integer": {
+            "min": 0,
+            "max": 3000000
+        }
+    },
+    "accountNumber": {
+        "$integer": {
+            "min": 0,
+            "max": 30000000
+        }
+    },
+    "product": {
+        "quantity": {
+            "$integer": {
+                "min": 1,
+                "max": 3
+            }
+        },
+        "productCode1": "$string",
+        "productCode2": "$string",
+        "productAttributes": {
+            "$array": {
+                "of": {
+                    "name": "$string",
+                    "value": "$string"
+                },
+                "number": {
+                    "$integer": {
+                        "min": 2,
+                        "max": 5
+                    }
+                }
+            }
+        },
+        "productSpecId": {
+            "$integer": {
+                "min": 0,
+                "max": 1000000
+            }
+        },
+        "resources": {
+            "$array": {
+                "of": {
+                    "resourceType": {
+                        "$choose": {
+                            "from": [
+                                "IMSI",
+                                "MSISDN",
+                                "DEVICE_ID",
+                                "ICC_ID"
+                            ]
+                        }
+                    },
+                    "resourceValue": {
+                        "$inc": {
+                            "start": 0
+                        }
+                    },
+                    "resourceStatus": {
+                        "$choose": {
+                            "from": [
+                                "FREE",
+                                "ACTIVE",
+                                "RESERVED",
+                                "CEASED"
+                            ]
+                        }
+                    }
+                },
+                "number": {
+                    "$integer": {
+                        "min": 2,
+                        "max": 5
+                    }
+                }
+            }
+        }
+    }
+}

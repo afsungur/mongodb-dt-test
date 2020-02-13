@@ -1,0 +1,11 @@
+sharding:
+  configDB: config-server-replica-set/localhost:21001,localhost:21002,localhost:21003
+net:
+  bindIp: localhost
+  port: 30002
+systemLog:
+   destination: file
+   path: "/home/ec2-user/localdbcluster/log/mongos/02/mongos.log"
+   logAppend: true
+processManagement:
+   fork: true
